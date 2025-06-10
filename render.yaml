@@ -10,8 +10,8 @@ services:
     env: python
     plan: free
     region: oregon
-    buildCommand: "./bin/render-compile.sh"
-   startCommand: "npm run render-serve"
+    buildCommand: pip install -r requirements.txt
+   startCommand: bash -c 'python3 manage.py collectstatic --no-input && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:$PORT'
     envVars:
       - key: DATABASE_URL
         fromDatabase:
